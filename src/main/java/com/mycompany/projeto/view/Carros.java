@@ -3,18 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.projeto.view;
+import com.mycompany.projeto.conexaodb.ConexaoBanco;
+import com.mycompany.projeto.model.Carro;
 
 /**
  *
  * @author beatriz.miranda
  */
 public class Carros extends javax.swing.JFrame {
-
+     Carro carroForm;
+    
     /**
      * Creates new form Carros
      */
     public Carros() {
         initComponents();
+        this.carroForm = carroForm;
+        campoAno.setText(String.valueOf(this.carroForm.getAno()));
+        campoModelo.setText(this.carroForm.getModelo());
+        campoProprietario.setText(this.carroForm.getProprietario());
+        campoPlaca.setText(this.carroForm.getPlaca());
     }
 
     /**
@@ -33,6 +41,8 @@ public class Carros extends javax.swing.JFrame {
         campoAno = new javax.swing.JTextField();
         campoProprietario = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
+        labelPlaca = new javax.swing.JLabel();
+        campoPlaca = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,23 +59,27 @@ public class Carros extends javax.swing.JFrame {
             }
         });
 
+        labelPlaca.setText("Placa:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelProprietario)
-                    .addComponent(labelAno, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelModelo, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labelProprietario)
+                        .addComponent(labelAno, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelModelo, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(labelPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalvar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(campoModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                        .addComponent(campoAno)
-                        .addComponent(campoProprietario)))
+                    .addComponent(campoModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                    .addComponent(campoAno)
+                    .addComponent(campoProprietario)
+                    .addComponent(campoPlaca))
                 .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -84,8 +98,12 @@ public class Carros extends javax.swing.JFrame {
                     .addComponent(labelProprietario)
                     .addComponent(campoProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPlaca)
+                    .addComponent(campoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(btnSalvar)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,6 +111,18 @@ public class Carros extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
+            ConexaoBanco banco = new ConexaoBanco();
+            carroForm = new Carro (Integer.valueOf(campoAno.getText()),campoModelo.getText(),campoProprietario.getText(), campoPlaca.getText());
+            banco.inserir("vaga (nomevaga,localvaga)",
+                "(" + 
+                      "\'" + carroForm.getAno() + "\'" + "," + 
+                      "\'" + carroForm.getProprietario() + "\'" + "," + 
+                      "\'" + carroForm.getPlaca() + "\'" + "," + 
+                      "\'" + carroForm.getModelo() + "\'" 
+                    + ")");
+        
+        
+    
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
@@ -134,9 +164,11 @@ public class Carros extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField campoAno;
     private javax.swing.JTextField campoModelo;
+    private javax.swing.JTextField campoPlaca;
     private javax.swing.JTextField campoProprietario;
     private javax.swing.JLabel labelAno;
     private javax.swing.JLabel labelModelo;
+    private javax.swing.JLabel labelPlaca;
     private javax.swing.JLabel labelProprietario;
     // End of variables declaration//GEN-END:variables
 }

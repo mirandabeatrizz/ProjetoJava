@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.projeto.view;
+import com.mycompany.projeto.model.Vaga;
+import com.mycompany.projeto.conexaodb.ConexaoBanco;
 
 /**
  *
  * @author beatriz.miranda
  */
 public class Vagas extends javax.swing.JFrame {
-
+        Vaga vg = new Vaga();
     /**
      * Creates new form Vagas
      */
@@ -83,7 +85,16 @@ public class Vagas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVagaActionPerformed
-            dispose();        // TODO add your handling code here:
+        ConexaoBanco banco = new ConexaoBanco();
+        vg.setNome(campoNomeVaga.getText());
+        vg.setLocal(campoLocalVaga.getText());
+        
+        banco.inserir("vaga (nomevaga,localvaga)",
+                "(" + 
+                      "\'" + vg.getNome() + "\'" + "," + 
+                      "\'" + vg.getLocal() + "\'" 
+                    + ")");    
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarVagaActionPerformed
 
     /**

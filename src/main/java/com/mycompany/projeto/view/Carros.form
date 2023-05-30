@@ -25,19 +25,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="labelProprietario" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelAno" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelModelo" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="labelProprietario" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelAno" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelModelo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="labelPlaca" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="campoModelo" alignment="0" pref="77" max="32767" attributes="0"/>
-                      <Component id="campoAno" alignment="0" max="32767" attributes="0"/>
-                      <Component id="campoProprietario" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="campoModelo" alignment="0" pref="77" max="32767" attributes="0"/>
+                  <Component id="campoAno" alignment="0" max="32767" attributes="0"/>
+                  <Component id="campoProprietario" alignment="0" max="32767" attributes="0"/>
+                  <Component id="campoPlaca" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="172" max="32767" attributes="0"/>
           </Group>
@@ -62,8 +64,13 @@
                   <Component id="campoProprietario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="110" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,6 +104,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelPlaca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Placa:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoPlaca">
     </Component>
   </SubComponents>
 </Form>

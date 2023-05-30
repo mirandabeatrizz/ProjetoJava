@@ -4,12 +4,15 @@
  */
 package com.mycompany.projeto.view;
 
+import com.mycompany.projeto.conexaodb.ConexaoBanco;
+import com.mycompany.projeto.model.Usuario;
+
 /**
  *
  * @author beatriz.miranda
  */
 public class Login extends javax.swing.JFrame {
-
+Usuario user = new Usuario();
     /**
      * Creates new form Login
      */
@@ -82,6 +85,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+            ConexaoBanco banco = new ConexaoBanco(); 
+            user.setUsuario(campoUsuario.getText());
+            user.setSenha(campoSenha.getText());
+            banco.inserir("login (usuario,senha)",
+                "(" + 
+                      "\'" + user.getUsuario() + "\'" + "," + 
+                      "\'" + user.getSenha() + "\'" 
+                    + ")");
+            
             Principal principal = new Principal();
             principal.setVisible(true);
             dispose();
