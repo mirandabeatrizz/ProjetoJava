@@ -76,4 +76,53 @@ public class ConexaoBanco {
             e.printStackTrace();
         }
     }
+        public ResultSet buscarDados(String tabela) {
+        try {
+            open();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM "+tabela+"");
+            return rs;
+        } catch (SQLException e) {
+            close();
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+        public void alterar(String tabela, String valores) {
+        try {
+    // Abrindo a conexão com o banco
+            open();
+    // Instanciando o objeto preparedStatement (pstmt)
+            pstmt = conn.prepareStatement(
+                    "UPDATE "+ tabela+" SET "+valores+"");
+    // Setando o valor ao parâmetro
+            //pstmt.setString(1, "MARIA");
+            //pstmt.setInt(2, 1);            
+    // Fechando a conexão com o banco
+            pstmt.execute();
+            close();
+        } catch (SQLException e) {
+    // Fechando a conexão com o banco
+            close();
+            e.printStackTrace();
+        }
+    }
+
+    public void excluir(String tabela, String condicao) {
+        try {
+    // Abrindo a conexão com o banco
+            open();
+    // Instanciando o objeto preparedStatement (pstmt)
+            pstmt = conn.prepareStatement(
+                    "DELETE FROM "+tabela+ " " +condicao);   
+            pstmt.execute();
+    // Fechando a conexão com o banco
+            close();
+        } catch (SQLException e) {
+    // Fechando a conexão com o banco
+            close();
+            e.printStackTrace();
+        }
+    }    
 }

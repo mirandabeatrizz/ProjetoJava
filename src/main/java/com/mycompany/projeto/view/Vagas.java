@@ -18,6 +18,14 @@ public class Vagas extends javax.swing.JFrame {
     public Vagas() {
         initComponents();
     }
+    
+    public Vagas(Vaga vg){
+        initComponents();
+        this.vg = vg;
+        campoNomeVaga.setText(this.vg.getNome());
+        campoLocalVaga.setText(this.vg.getLocal());
+                
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,7 +101,10 @@ public class Vagas extends javax.swing.JFrame {
                 "(" + 
                       "\'" + vg.getNome() + "\'" + "," + 
                       "\'" + vg.getLocal() + "\'" 
-                    + ")");    
+                    + ")");   
+        
+        Salvo salvo = new Salvo();
+        salvo.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarVagaActionPerformed
 

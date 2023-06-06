@@ -4,6 +4,10 @@
  */
 package com.mycompany.projeto.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author beatriz.miranda
@@ -30,17 +34,18 @@ public class Principal extends javax.swing.JFrame {
         btnVagas = new javax.swing.JButton();
         btnOcupar = new javax.swing.JButton();
         btnRelatorio = new javax.swing.JButton();
+        btnRelatorioVagas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnCarros.setText("Carros");
+        btnCarros.setText("Adicionar Carros");
         btnCarros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCarrosActionPerformed(evt);
             }
         });
 
-        btnVagas.setText("Vagas");
+        btnVagas.setText("Adicionar Vagas");
         btnVagas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVagasActionPerformed(evt);
@@ -54,10 +59,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnRelatorio.setText("Relatório");
+        btnRelatorio.setText("Relatório Carros");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioActionPerformed(evt);
+            }
+        });
+
+        btnRelatorioVagas.setText("Relatório Vagas");
+        btnRelatorioVagas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioVagasActionPerformed(evt);
             }
         });
 
@@ -67,33 +79,40 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(btnCarros)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCarros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnVagas)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVagas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRelatorioVagas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(btnOcupar)
-                .addGap(18, 18, 18)
-                .addComponent(btnRelatorio)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCarros)
-                    .addComponent(btnVagas)
-                    .addComponent(btnOcupar)
-                    .addComponent(btnRelatorio))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOcupar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCarros)
+                            .addComponent(btnVagas))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRelatorio)
+                            .addComponent(btnRelatorioVagas))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCarrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrosActionPerformed
-            Carros carro = new Carros();
-            carro.setVisible(true);
+            Carros carros = new Carros();
+            carros.setVisible(true);
             dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnCarrosActionPerformed
 
@@ -110,10 +129,24 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOcuparActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        Relatorio relatorio = new Relatorio();
-        relatorio.setVisible(true);
+        try {
+            Relatorio relatorio = new Relatorio();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //relatorio.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRelatorioActionPerformed
+
+    private void btnRelatorioVagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioVagasActionPerformed
+                     try {
+            RelatorioVagas relatorioVagas = new RelatorioVagas();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //relatorio.setVisible(true);
+        dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatorioVagasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +187,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnCarros;
     private javax.swing.JButton btnOcupar;
     private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnRelatorioVagas;
     private javax.swing.JButton btnVagas;
     // End of variables declaration//GEN-END:variables
 }

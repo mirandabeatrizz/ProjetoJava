@@ -3,6 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.projeto.view;
+import java.util.ArrayList;
+import java.util.List;
+import com.mycompany.projeto.model.Carro;
+import com.mycompany.projeto.conexaodb.ConexaoBanco;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
 
 /**
  *
@@ -11,12 +22,39 @@ package com.mycompany.projeto.view;
 public class Relatorio extends javax.swing.JFrame {
 
     /**
-     * Creates new form Relatório
+     * Creates new form Relatório]
+     * 
      */
-    public Relatorio() {
+    List <Carro> listaCarros = new ArrayList<Carro>();
+    public Relatorio() throws SQLException {
         initComponents();
+        exibirCarros();
     }
-
+    
+    public void exibirCarros() throws SQLException {
+        ConexaoBanco banco = new ConexaoBanco();
+        listaCarros = new ArrayList<Carro>();
+        ResultSet rs = banco.buscarDados("carro");
+        while(rs.next()){
+        Carro car = new Carro();
+            car.setModelo(rs.getString("modelo"));
+            car.setAno(Integer.parseInt(rs.getString("ano")));
+            car.setPlaca(rs.getString("placa"));
+            car.setProprietário(rs.getString("proprietario"));
+       
+            listaCarros.add(car);
+        }
+        for (int i = 0; i <listaCarros.size(); i++){
+            tblCarros.setValueAt(listaCarros.get(i).getAno(), i, 0);
+            tblCarros.setValueAt(listaCarros.get(i).getModelo(), i, 1);
+            tblCarros.setValueAt(listaCarros.get(i).getPlaca(), i, 2);
+            tblCarros.setValueAt(listaCarros.get(i).getProprietario(), i, 3);
+        }
+        
+        this.setVisible(true);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,44 +65,200 @@ public class Relatorio extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCarros = new javax.swing.JTable();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCarros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"vaga 1 ", "carro | jose"},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Vaga", "Carro"
+                "Ano", "Modelo", "Placa", "Proprietario"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCarros);
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditar)
+                    .addComponent(btnExcluir))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        Carro cr = new Carro();
+        cr.setAno(Integer.valueOf(tblCarros.getModel().getValueAt(tblCarros.getSelectedRow(), 0).toString()));
+        cr.setModelo(tblCarros.getModel().getValueAt(tblCarros.getSelectedRow(),1).toString());
+        cr.setPlaca(tblCarros.getModel().getValueAt(tblCarros.getSelectedRow(),2).toString());
+        cr.setProprietário(tblCarros.getModel().getValueAt(tblCarros.getSelectedRow(),3).toString());
+        
+        Carros crs = new Carros(cr);
+        crs.setVisible(true);
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+     private void limparTabela() {
+        for (int i = 0; i < listaCarros.size(); i++) {
+            tblCarros.setValueAt("", i, 0);
+            tblCarros.setValueAt("", i, 1);
+            tblCarros.setValueAt("", i, 2);
+            tblCarros.setValueAt("", i, 3);
+        }
+    }
+    
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        ConexaoBanco banco = new ConexaoBanco();
+        String modelo = tblCarros.getModel().getValueAt(tblCarros.getSelectedRow(), 1).toString();
+        banco.excluir("carro", "where modelo = " + "\'" + modelo + "\'");
+        // TODO add your handling code here:
+        try {
+           
+            limparTabela();
+            exibirCarros();
+        } catch (SQLException ex) {
+            Logger.getLogger(Relatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,13 +291,15 @@ public class Relatorio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Relatorio().setVisible(true);
+               //new Relatorio().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblCarros;
     // End of variables declaration//GEN-END:variables
 }

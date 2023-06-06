@@ -45,7 +45,7 @@ public class Carro {
         return proprietario;
     }
     
-    public void setProprietário(String Proprietario){
+    public void setProprietário(String proprietario){
         this.proprietario = proprietario;
     }
     
@@ -54,7 +54,7 @@ public class Carro {
     }
      
     
-    public void setPlaca(String Placa){
+    public void setPlaca(String placa){
         this.placa = placa;
     }
     

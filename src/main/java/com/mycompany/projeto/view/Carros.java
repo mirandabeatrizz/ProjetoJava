@@ -11,12 +11,15 @@ import com.mycompany.projeto.model.Carro;
  * @author beatriz.miranda
  */
 public class Carros extends javax.swing.JFrame {
-     Carro carroForm;
+     Carro carroForm = new Carro();
     
     /**
      * Creates new form Carros
      */
-    public Carros() {
+      public Carros() {
+        initComponents();
+    }
+    public Carros(Carro cr) {
         initComponents();
         this.carroForm = carroForm;
         campoAno.setText(String.valueOf(this.carroForm.getAno()));
@@ -24,6 +27,9 @@ public class Carros extends javax.swing.JFrame {
         campoProprietario.setText(this.carroForm.getProprietario());
         campoPlaca.setText(this.carroForm.getPlaca());
     }
+    
+   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,8 +118,12 @@ public class Carros extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
             ConexaoBanco banco = new ConexaoBanco();
-            carroForm = new Carro (Integer.valueOf(campoAno.getText()),campoModelo.getText(),campoProprietario.getText(), campoPlaca.getText());
-            banco.inserir("vaga (nomevaga,localvaga)",
+            //carroForm = new Carro (Integer.valueOf(campoAno.getText()),campoModelo.getText(),campoProprietario.getText(), campoPlaca.getText());
+            carroForm.setAno(Integer.valueOf(campoAno.getText()));
+            carroForm.setModelo(campoModelo.getText());
+            carroForm.setPlaca(campoPlaca.getText());
+            carroForm.setProprietário(campoProprietario.getText());
+            banco.inserir("carro(ano, proprietario, placa, modelo)",
                 "(" + 
                       "\'" + carroForm.getAno() + "\'" + "," + 
                       "\'" + carroForm.getProprietario() + "\'" + "," + 
@@ -122,7 +132,8 @@ public class Carros extends javax.swing.JFrame {
                     + ")");
         
         
-    
+     Salvo salvo = new Salvo();
+     salvo.setVisible(true);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
@@ -155,7 +166,7 @@ public class Carros extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Carros().setVisible(true);
+                //new Carros().setVisible(true);
             }
         });
     }
