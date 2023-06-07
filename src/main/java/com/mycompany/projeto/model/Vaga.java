@@ -17,7 +17,7 @@ public class Vaga {
         
     }
     
-    public Vaga( String nome, String Local){
+    public Vaga( String nome, String local){
         this.nome = nome;
         this.local = local;
     }

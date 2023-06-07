@@ -5,6 +5,9 @@
 package com.mycompany.projeto.view;
 import com.mycompany.projeto.model.Vaga;
 import com.mycompany.projeto.conexaodb.ConexaoBanco;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,6 +15,7 @@ import com.mycompany.projeto.conexaodb.ConexaoBanco;
  */
 public class Vagas extends javax.swing.JFrame {
         Vaga vg = new Vaga();
+        String nome;
     /**
      * Creates new form Vagas
      */
@@ -22,6 +26,7 @@ public class Vagas extends javax.swing.JFrame {
     public Vagas(Vaga vg){
         initComponents();
         this.vg = vg;
+        nome = this.vg.getNome();
         campoNomeVaga.setText(this.vg.getNome());
         campoLocalVaga.setText(this.vg.getLocal());
                 
@@ -94,20 +99,43 @@ public class Vagas extends javax.swing.JFrame {
 
     private void btnSalvarVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarVagaActionPerformed
         ConexaoBanco banco = new ConexaoBanco();
-        vg.setNome(campoNomeVaga.getText());
-        vg.setLocal(campoLocalVaga.getText());
-        
-        banco.inserir("vaga (nomevaga,localvaga)",
+        if (vg == null) {
+            vg = new Vaga (campoNomeVaga.getText(), campoLocalVaga.getText());
+             banco.inserir("vaga (nomevaga,localvaga)",
                 "(" + 
                       "\'" + vg.getNome() + "\'" + "," + 
                       "\'" + vg.getLocal() + "\'" 
                     + ")");   
+        } else{
+            vg = new Vaga (campoNomeVaga.getText(), campoLocalVaga.getText());
+            banco.alterar("vaga", 
+                    "nomevaga = " + "\'" + vg.getNome() + "\'" + "," +
+                    "localvaga = " + "\'" + vg.getLocal() + "\'" +
+                    "Where nomevaga = " + "\'" + nome + "\'");
+            vg = null;
+        } 
+        dispose();
         
-        Salvo salvo = new Salvo();
-        salvo.setVisible(true);
-        dispose();        // TODO add your handling code here:
+    try{
+        RelatorioVagas rv = new RelatorioVagas();
+        rv.setVisible(true);
+    }catch(SQLException ex)
+            {
+        Logger.getLogger(Vagas.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarVagaActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt){
+        try{
+            RelatorioVagas relatorioVagas = new RelatorioVagas();
+            relatorioVagas.setVisible(true);
+        }
+        catch (SQLException ex){
+            Logger.getLogger(Vagas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
